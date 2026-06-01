@@ -131,7 +131,7 @@ export const translations: Record<Language, Translation> = {
     contact: {
       heading: 'Contact',
       intro: 'Interested in working together? Feel free to reach out via email or connect on LinkedIn.',
-      sendEmail: 'Send Email',
+      sendEmail: 'Email',
     },
   },
 
@@ -202,7 +202,7 @@ export const translations: Record<Language, Translation> = {
     contact: {
       heading: 'Contato',
       intro: 'Interessado em trabalhar juntos? Entre em contato por email ou conecte-se no LinkedIn.',
-      sendEmail: 'Enviar Email',
+      sendEmail: 'Email',
     },
   },
 
@@ -273,7 +273,7 @@ export const translations: Record<Language, Translation> = {
     contact: {
       heading: 'Контакты',
       intro: 'Хотите сотрудничать? Напишите мне на email или свяжитесь в LinkedIn.',
-      sendEmail: 'Отправить email',
+      sendEmail: 'Email',
     },
   },
 };
