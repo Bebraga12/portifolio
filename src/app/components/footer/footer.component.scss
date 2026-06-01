@@ -1,0 +1,34 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+.footer {
+  background: $darker-bg;
+  border-top: 1px solid $border;
+  padding: $space-10 $space-4;
+}
+.footer-container {
+  @include section-container;
+  @include flex-center;
+  flex-direction: column;
+  gap: $space-3;
+  text-align: center;
+}
+.footer-prompt {
+  font-family: $font-mono;
+  font-size: $fs-sm;
+  margin-bottom: $space-2;
+  .prompt-sym {
+    color: $green-neon;
+    margin-right: $space-2;
+  }
+  .prompt-cmd {
+    color: $text-muted;
+  }
+}
+.footer-copy {
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: $text-muted;
+}
+.footer-name {
+  color: $green-dim;
+}

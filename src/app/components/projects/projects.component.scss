@@ -1,0 +1,142 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+.projects {
+  background: $dark-bg;
+  border-top: 1px solid $border;
+  border-bottom: 1px solid $border;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+  @include md {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.project-card {
+  @include terminal-card;
+  display: flex;
+  flex-direction: column;
+  transition: all $transition-base;
+  &:hover {
+    @include terminal-card-hover;
+    .project-title {
+      color: $green-neon;
+    }
+    .project-link {
+      color: $green-neon;
+      @include glow-text($green-neon, 0.5);
+    }
+  }
+}
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid $border;
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    &:nth-child(1) { background: #ff5f56; }
+    &:nth-child(2) { background: #ffbd2e; }
+    &:nth-child(3) { background: #27c93f; }
+  }
+  .project-file {
+    flex: 1;
+    font-family: $font-mono;
+    font-size: $fs-xs;
+    color: $text-muted;
+    margin-left: $space-2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+.project-body {
+  flex: 1;
+  padding: $space-5 $space-6;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+.project-title {
+  font-family: $font-mono;
+  font-size: $fs-base;
+  font-weight: $fw-bold;
+  color: $text-bright;
+  transition: color $transition-fast;
+  display: flex;
+  align-items: baseline;
+  gap: $space-2;
+  &::before {
+    content: none;
+  }
+  .project-index {
+    font-size: $fs-xs;
+    color: $green-dim;
+    font-weight: $fw-normal;
+    flex-shrink: 0;
+  }
+}
+.project-description {
+  font-size: $fs-sm;
+  color: $text-secondary;
+  line-height: 1.75;
+}
+.project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-top: auto;
+}
+.stack-tag {
+  @include tech-tag;
+}
+.project-footer {
+  padding: $space-4 $space-6;
+  border-top: 1px solid $border;
+  display: flex;
+  align-items: center;
+}
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: $text-secondary;
+  text-decoration: none;
+  transition: all $transition-fast;
+  padding: $space-1 0;
+  &:hover {
+    color: $green-neon;
+  }
+  &:focus-visible {
+    outline: 2px solid $green-neon;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+.private-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: $text-muted;
+  padding: $space-1 $space-3;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  svg {
+    flex-shrink: 0;
+    color: $text-muted;
+  }
+}

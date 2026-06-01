@@ -1,0 +1,41 @@
+<header class="navbar" [class.scrolled]="isScrolled()" [class.site-ready]="isSelected()">
+  <div class="navbar-container">
+    <button class="logo" (click)="scrollTo('hero')" aria-label="Go to top">
+      <span class="logo-prompt">~/</span>
+      <span class="logo-name">bb</span>
+    </button>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <button class="nav-link" (click)="scrollTo('about')">{{ t().nav.about }}</button>
+      <button class="nav-link" (click)="scrollTo('skills')">{{ t().nav.technologies }}</button>
+      <button class="nav-link" (click)="scrollTo('projects')">{{ t().nav.projects }}</button>
+      <button class="nav-link" (click)="scrollTo('contact')">{{ t().nav.contact }}</button>
+    </nav>
+
+    <div class="navbar-actions">
+      <div class="lang-wrapper">
+        <app-language-selector />
+      </div>
+
+      <button
+        class="hamburger"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="isMenuOpen()"
+        aria-label="Toggle menu"
+      >
+        <span class="bar" [class.open]="isMenuOpen()"></span>
+        <span class="bar" [class.open]="isMenuOpen()"></span>
+        <span class="bar" [class.open]="isMenuOpen()"></span>
+      </button>
+    </div>
+  </div>
+
+  @if (isMenuOpen()) {
+    <nav class="mobile-menu" aria-label="Mobile navigation">
+      <button class="mobile-link" (click)="scrollTo('about')">{{ t().nav.about }}</button>
+      <button class="mobile-link" (click)="scrollTo('skills')">{{ t().nav.technologies }}</button>
+      <button class="mobile-link" (click)="scrollTo('projects')">{{ t().nav.projects }}</button>
+      <button class="mobile-link" (click)="scrollTo('contact')">{{ t().nav.contact }}</button>
+    </nav>
+  }
+</header>

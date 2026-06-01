@@ -1,0 +1,191 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+@keyframes orbGrowIn {
+  0%   { transform: translate(-50%, -50%) scale(0.02); opacity: 0; }
+  50%  { opacity: 1; }
+  80%  { transform: translate(-50%, -50%) scale(1.04); }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+@keyframes heartbeat {
+  0%   { transform: translate(-50%, -50%) scale(0.84); }
+  4%   { transform: translate(-50%, -50%) scale(0.89); }
+  7%   { transform: translate(-50%, -50%) scale(1.28); }
+  28%  { transform: translate(-50%, -50%) scale(0.73); }
+  31%  { transform: translate(-50%, -50%) scale(1.56); }
+  53%  { transform: translate(-50%, -50%) scale(0.55); }
+  65%  { transform: translate(-50%, -50%) scale(0.62); }
+  77%  { transform: translate(-50%, -50%) scale(0.70); }
+  89%  { transform: translate(-50%, -50%) scale(0.77); }
+  100% { transform: translate(-50%, -50%) scale(0.84); }
+}
+@keyframes reveal {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes btnReveal {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes scrollReveal {
+  0%   { opacity: 0; transform: translateY(-12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollDrip {
+  0%    { clip-path: inset(0 0 100% 0); opacity: 0; }
+  18%   { clip-path: inset(0 0 0 0);    opacity: 1; }
+  38%   { clip-path: inset(0 0 0 0);    opacity: 1; }
+  58%   { clip-path: inset(100% 0 0 0); opacity: 1; }
+  63%   { clip-path: inset(100% 0 0 0); opacity: 0; }
+  100%  { clip-path: inset(0 0 100% 0); opacity: 0; }
+}
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: $navbar-h;
+}
+.hero-container {
+  @include section-container;
+  padding: $space-8 $space-4;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  min-height: 420px;
+  @include md { padding: $space-12 $space-8; }
+}
+.hero-prompt {
+  font-family: $font-mono;
+  font-size: $fs-sm;
+  min-height: 1.5em;
+  margin-bottom: $space-6;
+  @include md { font-size: $fs-base; }
+  .prompt-user  { color: $green-neon; }
+  .prompt-sep   { color: $text-muted; }
+  .prompt-path  { color: $green-medium; }
+  .prompt-sym   { color: $text-muted; }
+  .prompt-cmd   { color: $text-primary; }
+  .prompt-raw   { color: $text-primary; }
+  .prompt-cursor {
+    color: $green-neon;
+    animation: blink 1s step-end infinite;
+  }
+}
+.hero-name {
+  font-family: $font-mono;
+  font-size: $fs-3xl;
+  font-weight: $fw-bold;
+  color: $text-bright;
+  letter-spacing: -0.02em;
+  margin-bottom: $space-4;
+  min-height: 1.2em;
+  @include md { font-size: $fs-4xl; }
+  @include lg { font-size: $fs-5xl; }
+}
+.name-cursor {
+  color: $green-neon;
+  animation: blink 1s step-end infinite;
+  @include glow-text($green-neon, 1);
+  transition: opacity 0.2s ease;
+  &.done { opacity: 0; }
+}
+.hero-role {
+  font-family: $font-mono;
+  font-size: $fs-lg;
+  font-weight: $fw-medium;
+  color: $green-neon;
+  @include glow-text($green-neon, 0.7);
+  margin-bottom: $space-4;
+  @include md { font-size: $fs-xl; }
+}
+.hero-subtitle {
+  font-family: $font-mono;
+  font-size: $fs-sm;
+  color: $text-secondary;
+  letter-spacing: 0.04em;
+  max-width: 640px;
+  margin: 0 auto $space-10;
+  @include md { font-size: $fs-base; }
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: $space-4;
+  min-height: 48px;
+  .btn-primary { @include btn-primary; }
+  .btn-ghost   { @include btn-ghost; }
+}
+.reveal {
+  animation: reveal 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.btn-reveal {
+  animation: btnReveal 0.65s ease both;
+}
+.scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  margin-top: $space-16;
+  .scroll-line {
+    display: block;
+    width: 1px;
+    height: 44px;
+    background: linear-gradient(to bottom, $green-neon, rgba(0, 255, 65, 0.08));
+    border-radius: 1px;
+  }
+  .scroll-text {
+    font-family: $font-mono;
+    font-size: $fs-xs;
+    color: $text-muted;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
+.scroll-reveal {
+  animation: scrollReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  .scroll-line {
+    animation: scrollDrip 3.2s ease-in-out infinite both;
+    animation-delay: 0.7s;
+  }
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.bg-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 255, 65, 0.09) 0%,
+    rgba(0, 255, 65, 0.04) 28%,
+    rgba(0, 255, 65, 0.01) 48%,
+    transparent 60%
+  );
+  @include lg {
+    width: 600px;
+    height: 600px;
+  }
+  &.phase-hidden {
+    transform: translate(-50%, -50%) scale(0.02);
+    opacity: 0;
+  }
+  &.phase-growing {
+    animation: orbGrowIn 1.6s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+  }
+  &.phase-beating {
+    opacity: 1;
+    animation: heartbeat 5.5s linear infinite;
+  }
+}

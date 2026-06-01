@@ -1,0 +1,127 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  font-family: $font-sans;
+  font-size: $fs-base;
+  font-weight: $fw-normal;
+  color: $text-primary;
+  background-color: $darker-bg;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 255, 65, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: $darker-bg;
+}
+::-webkit-scrollbar-thumb {
+  background: $green-dark;
+  border-radius: 3px;
+  &:hover {
+    background: $green-dim;
+  }
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-mono;
+  font-weight: $fw-bold;
+  line-height: 1.2;
+  color: $text-bright;
+}
+p {
+  line-height: 1.7;
+  color: $text-secondary;
+}
+a {
+  color: $green-neon;
+  text-decoration: none;
+  transition: color $transition-fast;
+  &:hover {
+    color: $green-medium;
+  }
+  &:focus-visible {
+    outline: 2px solid $green-neon;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+code {
+  font-family: $font-mono;
+  font-size: 0.9em;
+  color: $green-neon;
+  background: rgba(0, 255, 65, 0.08);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+}
+.container {
+  @include section-container;
+  padding-left: $space-4;
+  padding-right: $space-4;
+  @include md {
+    padding-left: $space-8;
+    padding-right: $space-8;
+  }
+}
+.section {
+  @include section-base;
+  position: relative;
+  z-index: 1;
+}
+.section-title {
+  @include section-title;
+}
+.section-divider {
+  @include section-divider;
+}
+.text-neon {
+  color: $green-neon;
+  @include glow-text;
+}
+.text-mono {
+  font-family: $font-mono;
+}
+.text-muted {
+  color: $text-muted;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+.prompt {
+  color: $green-neon;
+  font-family: $font-mono;
+  @include glow-text($green-neon, 0.6);
+  &::before {
+    content: '$ ';
+  }
+}

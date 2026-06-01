@@ -1,0 +1,90 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+.about {
+  background: $dark-bg;
+  border-top: 1px solid $border;
+  border-bottom: 1px solid $border;
+}
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-8;
+  @include lg {
+    grid-template-columns: 1fr 260px;
+    align-items: start;
+    gap: $space-12;
+  }
+}
+.terminal-card {
+  @include terminal-card;
+}
+.terminal-header {
+  @include terminal-header;
+}
+.terminal-body {
+  padding: $space-4 $space-6;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+.bio-paragraph {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: $space-3;
+  font-size: $fs-base;
+  line-height: 1.8;
+  color: $text-secondary;
+  .line-num {
+    font-family: $font-mono;
+    font-size: $fs-xs;
+    color: $text-muted;
+    padding-top: 0.3em;
+    user-select: none;
+  }
+  .line-text {
+    color: $text-secondary;
+  }
+}
+.about-stats {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+.stat-card {
+  @include terminal-card;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  transition: all $transition-base;
+  &:hover {
+    @include terminal-card-hover;
+  }
+  .stat-label {
+    font-family: $font-mono;
+    font-size: $fs-xs;
+    color: $text-muted;
+  }
+  .stat-value {
+    font-family: $font-mono;
+    font-size: $fs-sm;
+    color: $text-primary;
+    font-weight: $fw-medium;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    &.available {
+      color: $green-neon;
+      @include glow-text($green-neon, 0.5);
+    }
+  }
+}
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: $green-neon;
+  animation: pulseGlow 2s ease infinite;
+  flex-shrink: 0;
+}

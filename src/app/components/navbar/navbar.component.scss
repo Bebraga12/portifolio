@@ -1,0 +1,160 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: $navbar-h;
+  background: rgba(10, 10, 10, 0.85);
+  border-bottom: 1px solid transparent;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color $transition-base, background $transition-base;
+  &.scrolled {
+    border-bottom-color: $border;
+    background: rgba(10, 10, 10, 0.96);
+  }
+}
+.navbar-container {
+  @include flex-between;
+  @include section-container;
+  height: 100%;
+  padding: 0 $space-4;
+  @include md {
+    padding: 0 $space-8;
+  }
+}
+.logo {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: $font-mono;
+  font-size: $fs-lg;
+  font-weight: $fw-bold;
+  padding: $space-1;
+  border-radius: $radius-sm;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease 0.5s;
+  &:hover .logo-name { @include glow-text; }
+  &:focus-visible { outline: 2px solid $green-neon; outline-offset: 3px; }
+  .logo-prompt { color: $text-muted; }
+  .logo-name   { color: $green-neon; transition: all $transition-fast; }
+}
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: $space-1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease 0.8s;
+  @include lg { display: flex; }
+}
+.nav-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: $font-mono;
+  font-size: $fs-sm;
+  color: $text-secondary;
+  padding: $space-2 $space-4;
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: $green-neon;
+    transition: width $transition-fast;
+    border-radius: 1px;
+  }
+  &:hover { color: $green-neon; &::after { width: 60%; } }
+  &:focus-visible { outline: 2px solid $green-neon; outline-offset: 2px; }
+}
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+.lang-wrapper {
+  opacity: 0;
+  transition: opacity 0.5s ease 0.1s;
+}
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-2;
+  border-radius: $radius-sm;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease 0.5s;
+  @include lg { display: none; }
+  &:focus-visible { outline: 2px solid $green-neon; outline-offset: 2px; }
+  .bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: $text-secondary;
+    border-radius: 1px;
+    transition: all $transition-fast;
+    transform-origin: center;
+    &.open {
+      background: $green-neon;
+      &:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      &:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      &:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    }
+  }
+}
+.navbar.site-ready {
+  .lang-wrapper {
+    opacity: 1;
+  }
+  .logo,
+  .hamburger {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-links {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 10, 10, 0.98);
+  border-top: 1px solid $border;
+  padding: $space-4 $space-4 $space-6;
+  animation: fadeInUp 0.2s ease;
+  @include lg { display: none; }
+}
+.mobile-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: $font-mono;
+  font-size: $fs-base;
+  color: $text-secondary;
+  padding: $space-4 $space-2;
+  text-align: left;
+  border-bottom: 1px solid $border;
+  transition: color $transition-fast;
+  &:last-child { border-bottom: none; }
+  &:hover { color: $green-neon; }
+  &:focus-visible { outline: 2px solid $green-neon; outline-offset: 2px; }
+}

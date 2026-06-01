@@ -1,0 +1,183 @@
+@use 'variables' as *;
+@mixin sm { @media (min-width: #{$bp-sm}) { @content; } }
+@mixin md { @media (min-width: #{$bp-md}) { @content; } }
+@mixin lg { @media (min-width: #{$bp-lg}) { @content; } }
+@mixin xl { @media (min-width: #{$bp-xl}) { @content; } }
+@mixin max-sm { @media (max-width: #{$bp-sm - 1px}) { @content; } }
+@mixin max-md { @media (max-width: #{$bp-md - 1px}) { @content; } }
+@mixin max-lg { @media (max-width: #{$bp-lg - 1px}) { @content; } }
+@mixin glow-text($color: $green-neon, $intensity: 0.8) {
+  text-shadow:
+    0 0 8px rgba($color, $intensity * 0.6),
+    0 0 20px rgba($color, $intensity * 0.3),
+    0 0 40px rgba($color, $intensity * 0.15);
+}
+@mixin glow-box($color: $green-neon, $intensity: 1) {
+  box-shadow:
+    0 0 6px rgba($color, $intensity * 0.3),
+    0 0 20px rgba($color, $intensity * 0.15),
+    inset 0 0 20px rgba($color, $intensity * 0.03);
+}
+@mixin glow-border($color: $green-neon) {
+  border-color: $color;
+  box-shadow:
+    0 0 8px rgba($color, 0.4),
+    0 0 20px rgba($color, 0.15);
+}
+@mixin terminal-card {
+  background: $card-bg;
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $green-dim, transparent);
+    opacity: 0.5;
+  }
+}
+@mixin terminal-card-hover {
+  border-color: $border-bright;
+  background: $card-bg-hover;
+  @include glow-box($green-neon, 0.8);
+  &::before {
+    opacity: 1;
+  }
+}
+@mixin terminal-header {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid $border;
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    &:nth-child(1) { background: #ff5f56; }
+    &:nth-child(2) { background: #ffbd2e; }
+    &:nth-child(3) { background: #27c93f; }
+  }
+  .title {
+    margin-left: $space-2;
+    font-family: $font-mono;
+    font-size: $fs-xs;
+    color: $text-muted;
+    flex: 1;
+  }
+}
+@mixin section-base {
+  padding: $space-20 $space-4;
+  @include lg {
+    padding: $space-32 $space-8;
+  }
+}
+@mixin section-container {
+  max-width: $max-width;
+  margin: 0 auto;
+}
+@mixin section-title {
+  font-family: $font-mono;
+  font-size: $fs-xl;
+  font-weight: $fw-bold;
+  color: $green-neon;
+  @include glow-text($green-neon, 0.7);
+  margin-bottom: $space-3;
+  @include md {
+    font-size: $fs-2xl;
+  }
+  &::before {
+    content: '// ';
+    color: $text-muted;
+    font-weight: $fw-normal;
+  }
+}
+@mixin section-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, $green-neon, transparent);
+  margin-bottom: $space-12;
+  border-radius: 1px;
+}
+@mixin btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-6;
+  background: transparent;
+  border: 1px solid $green-neon;
+  color: $green-neon;
+  font-family: $font-mono;
+  font-size: $fs-sm;
+  font-weight: $fw-medium;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all $transition-base;
+  @include glow-box($green-neon, 0.5);
+  &:hover {
+    background: $green-dark;
+    @include glow-box($green-neon, 1.2);
+    @include glow-text($green-neon, 0.8);
+    transform: translateY(-1px);
+  }
+  &:focus-visible {
+    outline: 2px solid $green-neon;
+    outline-offset: 3px;
+  }
+}
+@mixin btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-6;
+  background: transparent;
+  border: 1px solid $border-bright;
+  color: $text-secondary;
+  font-family: $font-mono;
+  font-size: $fs-sm;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all $transition-base;
+  &:hover {
+    border-color: $green-medium;
+    color: $green-medium;
+  }
+  &:focus-visible {
+    outline: 2px solid $green-neon;
+    outline-offset: 3px;
+  }
+}
+@mixin tech-tag {
+  display: inline-block;
+  padding: $space-1 $space-3;
+  background: rgba(0, 255, 65, 0.06);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  color: $green-medium;
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  border-radius: $radius-sm;
+  transition: all $transition-fast;
+  &:hover {
+    background: rgba(0, 255, 65, 0.12);
+    border-color: $green-neon;
+    color: $green-neon;
+  }
+}
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,0 +1,49 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.skill-card {
+  @include terminal-card;
+  padding: $space-6;
+  transition: all $transition-base;
+  &:hover {
+    @include terminal-card-hover;
+    .skill-category {
+      color: $green-neon;
+    }
+  }
+}
+.skill-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: $space-5;
+  padding-bottom: $space-4;
+  border-bottom: 1px solid $border;
+}
+.skill-category {
+  font-family: $font-mono;
+  font-size: $fs-sm;
+  font-weight: $fw-semi;
+  color: $text-primary;
+  transition: color $transition-fast;
+  &::before {
+    content: none;
+  }
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+.skill-tag {
+  @include tech-tag;
+}

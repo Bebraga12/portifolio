@@ -1,0 +1,93 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+.lang-selector {
+  position: relative;
+  z-index: 200;
+}
+.lang-trigger {
+  @include flex-center;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  background: transparent;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  color: $text-secondary;
+  font-family: $font-mono;
+  font-size: $fs-sm;
+  cursor: pointer;
+  transition: all $transition-base;
+  white-space: nowrap;
+  &:hover {
+    border-color: $green-dim;
+    color: $text-primary;
+  }
+  &:focus-visible {
+    outline: 2px solid $green-neon;
+    outline-offset: 2px;
+  }
+  .flag {
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .chevron {
+    font-size: $fs-md;
+    transition: transform $transition-fast;
+    display: inline-block;
+    color: $text-muted;
+    &.rotated {
+      transform: rotate(90deg);
+    }
+  }
+}
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + $space-2);
+  right: 0;
+  min-width: 160px;
+  background: $card-bg;
+  border: 1px solid $border-bright;
+  border-radius: $radius-md;
+  list-style: none;
+  overflow: hidden;
+  animation: fadeInUp 0.15s ease;
+  @include glow-box($green-neon, 0.6);
+  @include max-md {
+    right: auto;
+    left: 0;
+  }
+}
+.lang-option {
+  @include flex-center;
+  justify-content: flex-start;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  cursor: pointer;
+  font-family: $font-mono;
+  font-size: $fs-sm;
+  color: $text-secondary;
+  transition: all $transition-fast;
+  border-bottom: 1px solid $border;
+  &:last-child {
+    border-bottom: none;
+  }
+  &:hover {
+    background: rgba(0, 255, 65, 0.06);
+    color: $text-primary;
+  }
+  &:focus-visible {
+    outline: 2px solid $green-neon;
+    outline-offset: -2px;
+  }
+  &.active {
+    color: $green-neon;
+    background: rgba(0, 255, 65, 0.08);
+    .flag::after {
+      content: ' ✓';
+      font-size: $fs-xs;
+    }
+  }
+  .flag {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+}

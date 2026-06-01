@@ -1,0 +1,79 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+.contact-layout {
+  display: flex;
+  justify-content: center;
+}
+.contact-card {
+  @include terminal-card;
+  width: 100%;
+  max-width: 640px;
+}
+.contact-header {
+  @include terminal-header;
+}
+.contact-body {
+  padding: $space-8;
+  display: flex;
+  flex-direction: column;
+  gap: $space-8;
+}
+.contact-intro {
+  font-size: $fs-base;
+  color: $text-secondary;
+  line-height: 1.75;
+  text-align: center;
+}
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+.contact-btn {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-4 $space-6;
+  border-radius: $radius-md;
+  text-decoration: none;
+  font-family: $font-mono;
+  transition: all $transition-base;
+  border: 1px solid $border;
+  &.primary {
+    border-color: $green-neon;
+    background: rgba(0, 255, 65, 0.04);
+    color: $green-neon;
+    &:hover {
+      background: rgba(0, 255, 65, 0.1);
+      @include glow-box($green-neon, 1);
+      transform: translateX(4px);
+    }
+  }
+  &.ghost {
+    color: $text-secondary;
+    background: transparent;
+    &:hover {
+      border-color: $green-dim;
+      color: $text-primary;
+      background: rgba(0, 255, 65, 0.03);
+      transform: translateX(4px);
+    }
+  }
+  &:focus-visible {
+    outline: 2px solid $green-neon;
+    outline-offset: 3px;
+  }
+  svg {
+    flex-shrink: 0;
+  }
+  > span:nth-child(2) {
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    min-width: 80px;
+  }
+  .contact-value {
+    font-size: $fs-xs;
+    color: $text-muted;
+    margin-left: auto;
+  }
+}

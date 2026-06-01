@@ -1,0 +1,49 @@
+<section id="about" class="section about">
+  <div class="container">
+    <h2 class="section-title">{{ t().about.heading }}</h2>
+    <div class="section-divider"></div>
+
+    <div class="about-layout">
+      <div class="terminal-card">
+        <div class="terminal-header">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="terminal-label">about.md</span>
+        </div>
+
+        <div class="terminal-body">
+          @for (para of t().about.paragraphs; track $index) {
+            <p class="bio-paragraph">
+              <span class="line-num" aria-hidden="true">{{ ($index + 1).toString().padStart(2, '0') }}</span>
+              <span class="line-text">{{ para }}</span>
+            </p>
+          }
+        </div>
+      </div>
+
+      <aside class="about-stats">
+        <div class="stat-card">
+          <span class="stat-label">./location</span>
+          <span class="stat-value">Salvador, BR</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">./focus</span>
+          <span class="stat-value">Back-End</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">./primary</span>
+          <span class="stat-value">Java / Spring</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">./mode</span>
+          <span class="stat-value">Remote / Hybrid</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">./status</span>
+          <span class="stat-value available">Available<span class="status-dot"></span></span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
