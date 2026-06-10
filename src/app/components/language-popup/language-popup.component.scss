@@ -11,11 +11,12 @@
 }
 .popup-card {
   width: 100%;
-  max-width: 680px;
+  max-width: 420px;
   background: $card-bg;
   border: 1px solid $border-bright;
   border-radius: $radius-lg;
   overflow: hidden;
+  position: relative;
   animation: fadeInUp 0.4s ease;
   @include glow-box($green-neon, 0.8);
   &::before {
@@ -28,16 +29,16 @@
     background: linear-gradient(90deg, transparent, $green-neon, transparent);
   }
 }
-.popup-header {
-  @include terminal-header;
-}
 .popup-body {
   padding: $space-8;
   display: flex;
   flex-direction: column;
-  gap: $space-6;
+  align-items: center;
+  gap: $space-5;
+  text-align: center;
 }
 .popup-prompt {
+  align-self: flex-start;
   font-family: $font-mono;
   font-size: $fs-sm;
   color: $text-muted;
@@ -49,78 +50,126 @@
     color: $text-secondary;
   }
 }
-.popup-hint {
-  text-align: center;
-  margin: 0;
-}
-.lang-hint {
-  font-family: $font-mono;
-  font-size: $fs-xs;
-  color: $text-muted;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.lang-options {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: $space-4;
-  @include max-sm {
-    grid-template-columns: 1fr;
-  }
-}
-.lang-card {
+.lang-confirm {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: $space-3;
+  gap: $space-2;
   padding: $space-6 $space-4;
+  width: 100%;
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid $border;
   border-radius: $radius-md;
-  cursor: pointer;
-  transition: all $transition-base;
   font-family: $font-mono;
-  text-align: center;
+  .lang-flag {
+    font-size: 3rem;
+    line-height: 1;
+  }
+  .lang-name {
+    font-size: $fs-xl;
+    font-weight: $fw-semi;
+    color: $green-neon;
+    @include glow-text($green-neon, 0.7);
+  }
+  .lang-country {
+    font-size: $fs-xs;
+    color: $text-muted;
+  }
+  .lang-locale {
+    font-size: 0.65rem;
+    color: $text-muted;
+    opacity: 0.6;
+    letter-spacing: 0.03em;
+  }
+}
+.popup-question {
+  margin: 0;
+  font-family: $font-mono;
+  font-size: $fs-base;
+  color: $text-secondary;
+}
+.popup-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-4;
+  width: 100%;
+}
+.btn-confirm {
+  @include btn-primary;
+  width: 100%;
+  justify-content: center;
+}
+.lang-change {
+  position: relative;
+  width: 100%;
+}
+.btn-change {
+  @include btn-ghost;
+  width: 100%;
+  justify-content: center;
+  .chevron {
+    font-size: $fs-md;
+    transition: transform $transition-fast;
+    display: inline-block;
+    color: $text-muted;
+    transform: rotate(90deg);
+    &.rotated {
+      transform: rotate(-90deg);
+    }
+  }
+}
+.lang-dropdown {
+  position: absolute;
+  bottom: calc(100% + #{$space-2});
+  left: 0;
+  right: 0;
+  background: $card-bg;
+  border: 1px solid $border-bright;
+  border-radius: $radius-md;
+  list-style: none;
+  overflow: hidden;
+  animation: fadeInUp 0.15s ease;
+  @include glow-box($green-neon, 0.6);
+}
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  cursor: pointer;
+  font-family: $font-mono;
+  font-size: $fs-sm;
+  color: $text-secondary;
+  transition: all $transition-fast;
+  border-bottom: 1px solid $border;
+  text-align: left;
+  &:last-child {
+    border-bottom: none;
+  }
   &:hover {
-    border-color: $green-neon;
     background: rgba(0, 255, 65, 0.06);
-    @include glow-box($green-neon, 1);
-    transform: translateY(-3px);
-    .lang-name {
-      color: $green-neon;
-      @include glow-text($green-neon, 0.7);
-    }
-    .lang-locale {
-      color: $green-dim;
-    }
+    color: $text-primary;
   }
   &:focus-visible {
     outline: 2px solid $green-neon;
-    outline-offset: 3px;
+    outline-offset: -2px;
   }
-  &:active {
-    transform: translateY(-1px);
+  &.active {
+    color: $green-neon;
+    background: rgba(0, 255, 65, 0.08);
+    .flag::after {
+      content: ' ✓';
+      font-size: $fs-xs;
+    }
   }
-}
-.lang-flag {
-  font-size: 2.5rem;
-  line-height: 1;
-  display: block;
-}
-.lang-name {
-  font-size: $fs-base;
-  font-weight: $fw-semi;
-  color: $text-primary;
-  transition: all $transition-fast;
-}
-.lang-country {
-  font-size: $fs-xs;
-  color: $text-muted;
-}
-.lang-locale {
-  font-size: 0.65rem;
-  color: $text-muted;
-  opacity: 0.6;
-  transition: color $transition-fast;
-  letter-spacing: 0.03em;
+  .flag {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+  .country {
+    margin-left: auto;
+    font-size: $fs-xs;
+    color: $text-muted;
+  }
 }
