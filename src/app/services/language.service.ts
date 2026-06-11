@@ -31,17 +31,11 @@ export class LanguageService {
     return 'en';
   }
 
-  /** Changes the displayed language without confirming the user's choice. */
-  previewLanguage(lang: Language): void {
+  setLanguage(lang: Language): void {
     this._lang.set(lang);
     if (typeof document !== 'undefined') {
       document.documentElement.lang = lang;
     }
-  }
-
-  setLanguage(lang: Language): void {
-    this.previewLanguage(lang);
-    this._isSelected.set(true);
   }
 
   confirmLanguage(): void {

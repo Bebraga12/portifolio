@@ -1,6 +1,5 @@
-import { Component, signal, effect, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LanguageService } from './services/language.service';
-import { LanguagePopupComponent } from './components/language-popup/language-popup.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { AboutComponent } from './components/about/about.component';
@@ -13,7 +12,6 @@ import { FooterComponent } from './components/footer/footer.component';
   selector: 'app-root',
   standalone: true,
   imports: [
-    LanguagePopupComponent,
     NavbarComponent,
     HeroComponent,
     AboutComponent,
@@ -27,13 +25,8 @@ import { FooterComponent } from './components/footer/footer.component';
 })
 export class App {
   private readonly langService = inject(LanguageService);
-  readonly showLangPopup = signal(true);
 
   constructor() {
-    effect(() => {
-      if (this.langService.isSelected()) {
-        this.showLangPopup.set(false);
-      }
-    });
+    this.langService.confirmLanguage();
   }
 }
